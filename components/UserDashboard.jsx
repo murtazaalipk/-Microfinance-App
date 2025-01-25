@@ -80,7 +80,7 @@ const UserDashboard = () => {
           transition={{ duration: 1 }}
         >
           <Image
-            src="/saylanilogo.jpg"
+            src="/smit.png"
             alt="Saylani Logo"
             width={150}
             height={150}

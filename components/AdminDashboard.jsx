@@ -19,7 +19,7 @@ const AdminDashboard = () => {
           transition={{ duration: 1 }}
         >
           <Image
-            src="/saylanilogo.png"
+            src="/smit.png"
             alt="Saylani Logo"
             width={150}
             height={150}
