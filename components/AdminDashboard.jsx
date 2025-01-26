@@ -2,12 +2,34 @@
 import React from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
+import Loader from "./Loader";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
+
 
 const AdminDashboard = () => {
   const handleViewApplications = () => {
     alert("Navigating to view user applications!");
     // Replace with navigation logic, such as a router.push('/applications') if using Next.js
   };
+  
+  const { data: session, status } = useSession();
+  const userData = session?.user;
+  const router = useRouter();
+
+  
+  // Redirect to /login when session is null (user signs out)
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
+
+  if (!userData) {
+    return <Loader />;
+  }
+
 
   return (
     <div className="min-h-screen bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-white flex flex-col items-center">
