@@ -1,9 +1,27 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import Loader from "./Loader";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const UserDashboard = () => {
+  const { data: session, status } = useSession();
+  const userdata = session?.user;
+  const router = useRouter();
+
+  
+  // Redirect to /login when session is null (user signs out)
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
+
+  if (!userdata) {
+    return <Loader />;
+  }
   const loanCategories = [
     {
       title: "Wedding Loans",
