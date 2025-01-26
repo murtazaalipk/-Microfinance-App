@@ -11,17 +11,20 @@ const UserDashboard = () => {
   const userdata = session?.user;
   const router = useRouter();
 
-  
-  // Redirect to /login when session is null (user signs out)
-  useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/login");
-    }
-  }, [status, router]);
+  // State hooks always declared at the top level
+  const [modalData, setModalData] = useState({
+    visible: false,
+    category: "",
+  });
 
-  if (!userdata) {
-    return <Loader />;
-  }
+  const [userData, setUserData] = useState({
+    cnic: "",
+    email: "",
+    name: "",
+    loanAmount: "",
+    selectedCategory: "",
+  });
+
   const loanCategories = [
     {
       title: "Wedding Loans",
@@ -54,18 +57,16 @@ const UserDashboard = () => {
     },
   ];
 
-  const [modalData, setModalData] = useState({
-    visible: false,
-    category: "",
-  });
+  // Redirect to /login when session is null (user signs out)
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.push("/login");
+    }
+  }, [status, router]);
 
-  const [userData, setUserData] = useState({
-    cnic: "",
-    email: "",
-    name: "",
-    loanAmount: "",
-    selectedCategory: "",
-  });
+  if (!userdata) {
+    return <Loader />;
+  }
 
   const openModal = (category) => {
     setModalData({ visible: true, category });
@@ -108,13 +109,12 @@ const UserDashboard = () => {
           Saylani Welfare International Trust
         </h1>
         <p className="text-lg font-semibold mt-4 text-center text-gray-700 dark:text-gray-300 max-w-3xl">
-    <strong>
-      Empowering communities through compassion, innovation, and unwavering
-      commitment to eradicating poverty and uplifting lives.
-    </strong>
-  </p>
+          <strong>
+            Empowering communities through compassion, innovation, and unwavering
+            commitment to eradicating poverty and uplifting lives.
+          </strong>
+        </p>
       </section>
-        
 
       {/* Loan Categories Section */}
       <section className="p-8">
@@ -234,8 +234,8 @@ const UserDashboard = () => {
       )}
 
       {/* Footer */}
-      <footer className="p-6 bg-gray-800 text-white text-center">
-        &copy; 2025 Saylani Welfare International Trust. All rights reserved.
+      <footer className="py-6 bg-gray-900 text-white text-center">
+        <p>&copy; 2025 Saylani Welfare International Trust. All rights reserved.</p>
       </footer>
     </div>
   );
