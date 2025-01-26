@@ -3,6 +3,7 @@
 import { redirect } from "next/navigation";
 import { useSession } from "next-auth/react";
 import Loader from "@/components/Loader";
+import AdminDashboard from "@/components/AdminDashboard";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -15,9 +16,8 @@ export default function Home() {
     redirect("/");
   }
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
-      <h1 className="text-4xl font-bold mb-6">Admin Panel</h1>
-       
+    <div className="min-h-screen bg-gray-100 ">
+      <AdminDashboard/>       
     </div>
   );
 }

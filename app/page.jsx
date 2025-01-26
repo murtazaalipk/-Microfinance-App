@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 
-import Dashboard from "@/components/Dashboard";
+import UserDashboard from "@/components/UserDashboard";
 
 const Home = () => {
   const { data: session } = useSession();
@@ -15,7 +15,7 @@ const Home = () => {
     }
   }, [session, router]);
 
-  return <Dashboard role={session?.user} />;
+  return <UserDashboard role={session?.user} />;
 };
 
 export default Home;
